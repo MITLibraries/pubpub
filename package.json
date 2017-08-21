@@ -10,10 +10,14 @@
     "url": "https://github.com/pubpub/pubpub.git"
   },
   "scripts": {
-    "build": "rm -rf dist && webpack --config webpack/webpackConfigProd.js && cp -R static/* dist && cp _redirects-prod dist/_redirects",
-    "prod": "npm run build && serve ./dist -s",
+    "build-pubpub": "rm -rf dist && webpack --env.renderMode=pubpub --config webpack/webpackConfigProd.js && cp -R static/* dist && cp _redirects-prod dist/_redirects",
+    "build-community": "rm -rf dist && webpack --env.renderMode=community --config webpack/webpackConfigProd.js && cp -R static/* dist && cp _redirects-prod dist/_redirects",
+    "prod-pubpub": "npm run build-pubpub && serve ./dist -s",
+    "prod-community": "npm run build-community && serve ./dist -s",
     "lint": "eslint app webpack",
-    "start": "webpack-dev-server --env.mode=app --config webpack/webpackConfigDev.js",
+    "start": "npm run dev-community",
+    "dev-pubpub": "webpack-dev-server --env.containersPath=containersPubPub --config webpack/webpackConfigDev.js",
+    "dev-community": "webpack-dev-server --env.containersPath=containersCommunity --config webpack/webpackConfigDev.js",
     "storybook": "start-storybook -p 9001 -c .storybook -s ./static"
   },
   "dependencies": {
