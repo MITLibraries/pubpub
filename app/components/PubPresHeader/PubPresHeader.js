@@ -7,11 +7,13 @@ const propTypes = {
 	title: PropTypes.string.isRequired,
 	description: PropTypes.string,
 	backgroundImage: PropTypes.string,
+	isLoading: PropTypes.boolean,
 };
 
 const defaultProps = {
 	description: undefined,
 	backgroundImage: undefined,
+	isLoading: undefined,
 };
 
 const PubPresHeader = function(props) {
@@ -27,9 +29,9 @@ const PubPresHeader = function(props) {
 				<div className={'container pub'}>
 					<div className={'row'}>
 						<div className={'col-12'}>
-							<h1>{props.title}</h1>
+							<h1 className={props.isLoading ? 'pt-skeleton' : ''}>{props.title}</h1>
 							{props.description &&
-								<div className={'description'}>{props.description}</div>
+								<div className={`description ${props.isLoading ? 'pt-skeleton' : ''}`}>{props.description}</div>
 							}
 						</div>
 					</div>

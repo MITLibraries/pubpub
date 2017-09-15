@@ -5,6 +5,11 @@ require('./pubBody.scss');
 
 const propTypes = {
 	content: PropTypes.node.isRequired,
+	isLoading: PropTypes.boolean,
+};
+
+const defaultProps = {
+	isLoading: undefined,
 };
 
 const PubBody = function(props) {
@@ -12,7 +17,7 @@ const PubBody = function(props) {
 		<div className={'pub-body'}>
 			<div className={'container pub'}>
 				<div className={'row'}>
-					<div className={'col-12'}>
+					<div className={`col-12 ${props.isLoading ? 'pt-skeleton' : ''}`}>
 						{props.content}
 					</div>
 				</div>
@@ -21,5 +26,6 @@ const PubBody = function(props) {
 	);
 };
 
+PubBody.defaultProps = defaultProps;
 PubBody.propTypes = propTypes;
 export default PubBody;

@@ -13,11 +13,13 @@ const propTypes = {
 	numSuggestions: PropTypes.number,
 	collaborators: PropTypes.array.isRequired,
 	versions: PropTypes.array.isRequired,
+	isLoading: PropTypes.boolean,
 };
 
 const defaultProps = {
 	numDiscussions: 0,
 	numSuggestions: 0,
+	isLoading: undefined,
 };
 
 const PubPresDetails = function(props) {
@@ -35,7 +37,7 @@ const PubPresDetails = function(props) {
 			<div className={'container pub'}>
 				<div className={'row'}>
 					<div className={'col-12'}>
-						<div className={'details'}>
+						<div className={`details ${props.isLoading ? 'pt-skeleton' : ''}`}>
 							{authors.length && <span>by </span>}
 							{authors.map((author, index)=> {
 								const separator = index === authors.length - 1 ? '' : ', ';
@@ -53,46 +55,52 @@ const PubPresDetails = function(props) {
 							})}
 						</div>
 						<div className={'button'}>
-							<Popover
-								content={
-									<ul className={'pt-menu'}>
-										<li className={'pt-menu-header'} style={{ textAlign: 'right' }}>
-											<h6 style={{ paddingRight: '0px' }}>Published Snapshots</h6>
-										</li>
-										<li className={'pt-menu-divider'} />
-										{props.versions.sort((foo, bar)=>{
-											if (foo.createdAt < bar.createdAt) { return 1; }
-											if (foo.createdAt > bar.createdAt) { return -1; }
-											return 0;
-										}).map((version)=> {
-											return (
-												<li key={`version-${version.id}`} style={{ textAlign: 'right' }}>
-													<Link to={`/pub/${props.slug}`} className="pt-menu-item pt-popover-dismiss">
-														<span style={{ fontWeight: version.isActive ? '600' : 'normal' }}>
-															{dateFormat(version.createdAt, 'mmm dd, yyyy · HH:MM')}
-														</span>
-													</Link>
-												</li>
-											);
-										})}
-									</ul>
-								}
-								interactionKind={PopoverInteractionKind.CLICK}
-								position={Position.BOTTOM_RIGHT}
-								popoverClassName={'pt-minimal'}
-								transitionDuration={-1}
-								inheritDarkTheme={false}
-							>
-								<button className={'pt-button pt-minimal'}>
+							{props.isLoading ? (
+								<button className={'pt-button pt-minimal pt-skeleton'}>
 									{dateFormat(activeVersion.createdAt, 'mmm dd, yyyy')}
-									<span className={'pt-icon-standard pt-icon-caret-down pt-align-right'} />
 								</button>
-							</Popover>
+							) : (
+								<Popover
+									content={
+										<ul className={'pt-menu'}>
+											<li className={'pt-menu-header'} style={{ textAlign: 'right' }}>
+												<h6 style={{ paddingRight: '0px' }}>Published Snapshots</h6>
+											</li>
+											<li className={'pt-menu-divider'} />
+											{props.versions.sort((foo, bar)=>{
+												if (foo.createdAt < bar.createdAt) { return 1; }
+												if (foo.createdAt > bar.createdAt) { return -1; }
+												return 0;
+											}).map((version)=> {
+												return (
+													<li key={`version-${version.id}`} style={{ textAlign: 'right' }}>
+														<Link to={`/pub/${props.slug}`} className="pt-menu-item pt-popover-dismiss">
+															<span style={{ fontWeight: version.isActive ? '600' : 'normal' }}>
+																{dateFormat(version.createdAt, 'mmm dd, yyyy · HH:MM')}
+															</span>
+														</Link>
+													</li>
+												);
+											})}
+										</ul>
+									}
+									interactionKind={PopoverInteractionKind.CLICK}
+									position={Position.BOTTOM_RIGHT}
+									popoverClassName={'pt-minimal'}
+									transitionDuration={-1}
+									inheritDarkTheme={false}
+								>
+									<button className={`pt-button pt-minimal ${props.isLoading ? 'pt-skeleton' : ''}`}>
+										{dateFormat(activeVersion.createdAt, 'mmm dd, yyyy')}
+										<span className={'pt-icon-standard pt-icon-caret-down pt-align-right'} />
+									</button>
+								</Popover>
+							)}
 						</div>
 					</div>
 
 					<div className={'col-12'}>
-						<div className={'details'}>
+						<div className={`details ${props.isLoading ? 'pt-skeleton' : ''}`}>
 							{props.numDiscussions}
 							<span className={'pt-icon-standard pt-icon-chat'} />
 							{props.numSuggestions}
@@ -114,7 +122,7 @@ const PubPresDetails = function(props) {
 							})}
 						</div>
 						<div className={'button'}>
-							<Link to={`/pub/${props.slug}/collaborate`} className={'pt-button pt-intent-primary'}>Collaborate</Link>
+							<Link to={`/pub/${props.slug}/collaborate`} className={`pt-button pt-intent-primary ${props.isLoading ? 'pt-skeleton' : ''}`}>Collaborate</Link>
 						</div>
 					</div>
 				</div>

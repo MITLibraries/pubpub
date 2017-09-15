@@ -17,7 +17,7 @@ export const accentDataLight = {
 	accentMinimalColor: 'rgba(38, 224, 208, 0.15)',
 };
 
-// The following data should match the API routes they are associated with. 
+// The following data should match the API routes they are associated with.
 
 /*  api.pubpub.org/communities/:hostname  */
 export const communityData = require('./_dataCommunity.js').default;
@@ -275,5 +275,12 @@ export const pubBody = (
 			<li>Hoc non est positum in nostra actione.</li>
 			<li>At iste non dolendi status non vocatur voluptas.</li>
 		</ul>
+	</div>
+);
+
+export const pubBodyLoading = (
+	<div className={'article-content'}>
+		<p>Loading content.</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duo Reges: constructio interrete. Eam stabilem appellas. Consequens enim est et post oritur, ut dixi. Te enim iudicem aequum puto, modo quae dicat ille bene noris. Compensabatur, inquit, cum summis doloribus laetitia.</p>
 	</div>
 );

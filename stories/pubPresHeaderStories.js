@@ -36,4 +36,21 @@ storiesOf('PubPresHeader', module)
 			/>
 		</div>
 	</div>
+))
+.add('Loading', () => (
+	<div>
+		<div style={wrapperStyle}>
+			<PubPresHeader
+				title={'Loading Title'}
+				description={'Loading content description. Eveniet non quae inventore asperiores qui eius. Voluptatem nulla natus ad. Qui totam sunt nesciunt aut suscipit quibusdam officiis illum aspernatur. Non voluptas sed quisquam distinctio. Aliquam excepturi dolores dolorem excepturi occaecati. Consequatur voluptas asperiores libero.'}
+				isLoading={true}
+			/>
+		</div>
+		<div style={wrapperStyle}>
+			<PubPresHeader
+				title={'Soundscapes'}
+				description={description}
+			/>
+		</div>
+	</div>
 ));
