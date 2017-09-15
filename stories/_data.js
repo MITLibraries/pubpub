@@ -190,6 +190,17 @@ export const pubCollaborators = [
 	},
 ];
 
+export const pubCollaboratorsLoading = [
+	{
+		id: 0,
+		slug: 'trich',
+		userInitials: 'TR',
+		fullName: 'Travis Rich',
+		isAuthor: true,
+		color: 'red',
+	}
+];
+
 export const discussions = [
 	[
 		{
@@ -528,5 +539,11 @@ export const pubBody = (
 			<li>Hoc non est positum in nostra actione.</li>
 			<li>At iste non dolendi status non vocatur voluptas.</li>
 		</ul>
+	</div>
+);
+
+export const pubBodyLoading = (
+	<div className={'article-content'}>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duo Reges: constructio interrete. Eam stabilem appellas. Consequens enim est et post oritur, ut dixi. Te enim iudicem aequum puto, modo quae dicat ille bene noris. Compensabatur, inquit, cum summis doloribus laetitia. <b>Hoc simile tandem est?</b> </p>
 	</div>
 );
